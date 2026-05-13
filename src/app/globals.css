@@ -59,4 +59,21 @@
     backdrop-filter: blur(14px);
     box-shadow: var(--lcdv-ring-subtle);
   }
+  /**
+   * Franja dorada (Servicios + En venta): degradado radial centrado en el eje
+   * vertical y horizontal (50% 50%).
+   */
+  .lcdv-services-strip,
+  .lcdv-vehicles-strip {
+    color: var(--lcdv-text-on-gold);
+    background: radial-gradient(
+      circle farthest-corner at 50% 50%,
+      color-mix(in srgb, var(--lcdv-highlight-gold) 32%, var(--lcdv-light-gold)) 0%,
+      color-mix(in srgb, var(--lcdv-light-gold) 30%, var(--lcdv-soft-gold)) 34%,
+      color-mix(in srgb, var(--lcdv-soft-gold) 40%, var(--lcdv-primary-gold)) 62%,
+      color-mix(in srgb, var(--lcdv-primary-gold) 38%, var(--lcdv-muted-gold)) 100%
+    );
+    border-top: 1px solid color-mix(in srgb, var(--lcdv-highlight-gold) 50%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--lcdv-dark-bronze) 55%, transparent);
+  }
 }

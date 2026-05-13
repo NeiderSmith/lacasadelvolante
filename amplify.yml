@@ -12,6 +12,8 @@ frontend:
         - npm ci --cache .npm --prefer-offline
     build:
       commands:
+        # Genera amplify_outputs.json en la raíz antes de `next build` (next.config lo inyecta al bundle).
+        - npx ampx generate outputs --branch $AWS_BRANCH --app-id $AWS_APP_ID
         - npm run build
   artifacts:
     baseDirectory: .next

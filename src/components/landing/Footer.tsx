@@ -8,10 +8,10 @@ import {
 } from "@/lib/site-config";
 
 const quickLinks = [
+  { href: "#inicio", label: "Inicio" },
   { href: "#servicios", label: "Servicios" },
   { href: "#galeria", label: "Galería" },
   { href: "#vehiculos", label: "Vehículos" },
-  { href: "#testimonios", label: "Testimonios" },
   { href: "#contacto", label: "Contacto" },
 ];
 

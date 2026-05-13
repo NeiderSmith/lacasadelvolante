@@ -1,117 +1,147 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
+import { PLACEHOLDER_IMAGE_SRC } from "@/lib/placeholder-image";
 import { whatsappHref } from "@/lib/site-config";
-
-const pairs = [
-  {
-    before:
-      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80",
-    after:
-      "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=900&q=80",
-    title: "Restauración de interior deportivo",
-    caption:
-      "Tapicería premium: volante, asientos y detalles en cuero perforado.",
-  },
-  {
-    before:
-      "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=80",
-    after:
-      "https://images.unsplash.com/photo-1619405399517-d7fce0f13302?auto=format&fit=crop&w=900&q=80",
-    title: "Acabados tipo concesionario de lujo",
-    caption:
-      "Restauración de interiores de vehículos con control de color y textura.",
-  },
-];
+import { hasAmplifyOutputsEnv } from "@/lib/amplify/configure";
+import { useGalleryCategories } from "@/hooks/use-gallery-categories";
 
 export const GallerySection = () => {
+  const { categories, loading } = useGalleryCategories();
+
+  const introDefault =
+    "Tapicería automotriz y restauración de interiores en Bucaramanga. Cada categoría enlaza a su galería de trabajos.";
+
   return (
     <section
       id="galeria"
-      className="scroll-mt-24 border-t border-lcdv-gold-2/15 bg-lcdv-bg py-20 sm:py-28"
+      className="scroll-mt-28 border-t border-lcdv-gold-2/12 bg-lcdv-bg py-20 sm:py-28"
       aria-labelledby="galeria-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-lcdv-muted">
-            Galería
-          </p>
-          <h2
-            id="galeria-heading"
-            className="mt-2 font-display text-3xl font-semibold text-lcdv-text sm:text-4xl"
+        <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+          <div className="max-w-2xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-lcdv-muted">
+              Galería
+            </p>
+            <h2
+              id="galeria-heading"
+              className="mt-3 font-display text-3xl font-semibold leading-tight text-lcdv-text sm:text-4xl"
+            >
+              Trabajos realizados
+            </h2>
+            <p className="mt-3 text-sm text-lcdv-text-2 sm:text-base">
+              {introDefault}
+            </p>
+          </div>
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center justify-center rounded-full border border-lcdv-gold-2/45 px-5 py-2.5 text-sm font-semibold text-lcdv-text transition-colors hover:border-lcdv-highlight hover:text-lcdv-light"
+            aria-label="Consultar proyectos por WhatsApp"
           >
-            Antes y después: tapicería automotriz en Bucaramanga
-          </h2>
-          <p className="mt-4 text-base text-lcdv-text-2 sm:text-lg">
-            Resultados reales de tapizado de asientos, restauración de tableros y
-            tapicería premium automotriz Santander. Cada proyecto con estándar de
-            detailing de lujo.
-          </p>
+            Ver galería completa
+          </a>
         </div>
 
-        <div className="mt-14 space-y-16">
-          {pairs.map((pair, index) => (
-            <motion.article
-              key={pair.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="grid gap-8 lg:grid-cols-2 lg:items-center"
-            >
-              <div className="grid gap-4 sm:grid-cols-2">
-                <figure className="overflow-hidden rounded-2xl border border-lcdv-gold-2/25 shadow-lcdv-card">
-                  <div className="relative aspect-[4/3]">
-                    <Image
-                      src={pair.before}
-                      alt={`Antes: ${pair.title} — tapicería automotriz Bucaramanga`}
-                      fill
-                      loading="lazy"
-                      sizes="(max-width: 1024px) 50vw, 25vw"
-                      className="object-cover"
-                    />
-                  </div>
-                  <figcaption className="bg-lcdv-bronze/40 px-3 py-2 text-center text-xs font-semibold uppercase tracking-wider text-lcdv-muted">
-                    Antes
-                  </figcaption>
-                </figure>
-                <figure className="overflow-hidden rounded-2xl border border-lcdv-highlight/35 shadow-lcdv-glow">
-                  <div className="relative aspect-[4/3]">
-                    <Image
-                      src={pair.after}
-                      alt={`Después: ${pair.title} — restauración de interiores Bucaramanga`}
-                      fill
-                      loading="lazy"
-                      sizes="(max-width: 1024px) 50vw, 25vw"
-                      className="object-cover"
-                    />
-                  </div>
-                  <figcaption className="bg-lcdv-gold/30 px-3 py-2 text-center text-xs font-semibold uppercase tracking-wider text-lcdv-text">
-                    Después
-                  </figcaption>
-                </figure>
-              </div>
-              <div>
-                <h3 className="font-display text-2xl font-semibold text-lcdv-text">
-                  {pair.title}
-                </h3>
-                <p className="mt-3 text-sm text-lcdv-text-2 sm:text-base">
-                  {pair.caption}
-                </p>
-                <a
-                  href={whatsappHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-flex min-h-[44px] items-center rounded-full border border-lcdv-gold-2/50 px-6 py-2 text-sm font-semibold text-lcdv-text transition-colors hover:border-lcdv-highlight hover:text-lcdv-light"
-                  aria-label="Solicitar proyecto similar por WhatsApp"
+        {loading ? (
+          <p className="mt-10 text-sm text-lcdv-muted" aria-live="polite">
+            Cargando categorías del catálogo…
+          </p>
+        ) : null}
+
+        {!loading &&
+        categories.length === 0 &&
+        hasAmplifyOutputsEnv() ? (
+          <div
+            className="mt-12 rounded-2xl border border-lcdv-gold-2/20 bg-lcdv-bronze/10 px-6 py-10 text-center"
+            role="status"
+          >
+            <p className="font-display text-lg font-semibold text-lcdv-text">
+              Aún no hay categorías publicadas
+            </p>
+            <p className="mx-auto mt-2 max-w-md text-sm text-lcdv-text-2">
+              Cuando publiques categorías en el panel de administración (marcadas
+              como visibles en la web), aparecerán aquí en la rejilla.
+            </p>
+          </div>
+        ) : null}
+
+        {categories.length > 0 ? (
+          <ul
+            className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            aria-label="Categorías de la galería"
+          >
+            {categories.map((cat, index) => {
+              const workAlt =
+                cat.description?.trim() ||
+                `Tapicería automotriz ${cat.label} Bucaramanga — La Casa del Volante`;
+              const workCount = cat.works.length;
+
+              return (
+                <motion.li
+                  key={cat.slug}
+                  id={`galeria-${cat.slug}`}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{
+                    delay: index * 0.04,
+                    duration: 0.4,
+                  }}
+                  className="scroll-mt-28"
                 >
-                  Quiero un resultado así
-                </a>
-              </div>
-            </motion.article>
-          ))}
-        </div>
+                  <Link
+                    href={`/galeria/${cat.slug}`}
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-lcdv-gold-2/15 bg-lcdv-bronze/20 shadow-lcdv-card transition-colors hover:border-lcdv-highlight/40 hover:shadow-lcdv-soft"
+                  >
+                    <div className="relative aspect-[4/3] shrink-0 overflow-hidden">
+                      {cat.coverImageUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element -- URL firmada S3 (Amplify getUrl)
+                        <img
+                          src={cat.coverImageUrl}
+                          alt={workAlt}
+                          loading="lazy"
+                          className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                        />
+                      ) : (
+                        <Image
+                          src={PLACEHOLDER_IMAGE_SRC}
+                          alt={workAlt}
+                          fill
+                          loading="lazy"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                          className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                        />
+                      )}
+                    </div>
+                    <div className="flex flex-1 flex-col p-4 sm:p-5">
+                      <p className="font-display text-lg font-semibold leading-snug text-lcdv-text">
+                        {cat.label}
+                      </p>
+                      {cat.description ? (
+                        <p className="mt-2 line-clamp-2 text-xs text-lcdv-text-2 sm:text-sm">
+                          {cat.description}
+                        </p>
+                      ) : null}
+                      <p className="mt-2 text-[11px] font-medium uppercase tracking-wide text-lcdv-muted">
+                        {workCount === 0
+                          ? "Sin recursos aún"
+                          : `${workCount} recurso${workCount === 1 ? "" : "s"}`}
+                      </p>
+                      <span className="mt-3 inline-flex text-xs font-semibold text-lcdv-highlight group-hover:text-lcdv-light sm:text-sm">
+                        Ver trabajos →
+                      </span>
+                    </div>
+                  </Link>
+                </motion.li>
+              );
+            })}
+          </ul>
+        ) : null}
       </div>
     </section>
   );

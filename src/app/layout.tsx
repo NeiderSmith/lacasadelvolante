@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import { brandName, rootCssVariablesString, themeColorHex } from "@/lib/design-tokens";
 import { buildLocalBusinessJsonLd } from "@/lib/json-ld";
@@ -7,16 +7,17 @@ import { siteUrl } from "@/lib/site-config";
 
 const displayFont = Cormorant_Garamond({
   variable: "--font-lcdv-display",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
 });
 
-const sansFont = DM_Sans({
+const sansFont = Inter({
   variable: "--font-lcdv-sans",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
+  adjustFontFallback: true,
 });
 
 const keywords = [

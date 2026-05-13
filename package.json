@@ -22,7 +22,9 @@
   "devDependencies": {
     "@aws-amplify/backend": "^1.22.0",
     "@aws-amplify/backend-cli": "^1.8.2",
+    "@aws-sdk/client-cognito-identity-provider": "^3.1045.0",
     "@tailwindcss/postcss": "^4",
+    "@types/aws-lambda": "^8.10.161",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
