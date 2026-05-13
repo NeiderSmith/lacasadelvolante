@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Tokens (--lcdv-*) se inyectan desde layout desde design-style.json */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-lcdv-bg: var(--lcdv-primary-background);
+  --color-lcdv-gold: var(--lcdv-primary-gold);
+  --color-lcdv-gold-2: var(--lcdv-secondary-gold);
+  --color-lcdv-bronze: var(--lcdv-dark-bronze);
+  --color-lcdv-highlight: var(--lcdv-highlight-gold);
+  --color-lcdv-soft: var(--lcdv-soft-gold);
+  --color-lcdv-muted: var(--lcdv-muted-gold);
+  --color-lcdv-light: var(--lcdv-light-gold);
+  --color-lcdv-text: var(--lcdv-text-primary);
+  --color-lcdv-text-2: var(--lcdv-text-secondary);
+  --color-lcdv-text-dark: var(--lcdv-text-on-gold);
+  --shadow-lcdv-soft: var(--lcdv-shadow-soft);
+  --shadow-lcdv-card: var(--lcdv-shadow-card);
+  --shadow-lcdv-glow: var(--lcdv-shadow-glow);
+  --shadow-lcdv-inner: var(--lcdv-shadow-inner-gold);
+  --font-display: var(--font-lcdv-display), ui-serif, Georgia, serif;
+  --font-sans: var(--font-lcdv-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--lcdv-primary-background);
+    color: var(--lcdv-text-secondary);
+    font-family: var(--font-lcdv-sans), ui-sans-serif, system-ui, sans-serif;
+  }
+  ::selection {
+    background-color: color-mix(in srgb, var(--lcdv-highlight-gold) 35%, transparent);
+    color: var(--lcdv-text-primary);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .lcdv-bg-dark-elegant {
+    background-image: var(--lcdv-gradient-dark-elegant);
+  }
+  .lcdv-text-gradient {
+    background-image: var(--lcdv-gradient-luxury-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .lcdv-border-gradient {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--lcdv-primary-background), var(--lcdv-primary-background))
+        padding-box,
+      var(--lcdv-gradient-luxury-gold) border-box;
+  }
+  .lcdv-glass-nav {
+    background: color-mix(in srgb, var(--lcdv-primary-background) 82%, transparent);
+    backdrop-filter: blur(14px);
+    box-shadow: var(--lcdv-ring-subtle);
+  }
 }
