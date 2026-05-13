@@ -89,27 +89,36 @@ export default function AdminVehiculosPage() {
   };
 
   const getVehicleModel = useCallback(() => {
-    configureAmplifyClient();
+    if (!configureAmplifyClient()) return null;
     const client = adminDataClient();
     const m = client.models.VehicleListing;
-    if (!m?.list) return null;
+    if (typeof m?.list !== "function") return null;
     return m;
   }, []);
 
   const modelsAvailable = useCallback(() => {
-    configureAmplifyClient();
+    if (!configureAmplifyClient()) return false;
     const client = adminDataClient();
-    const v = client.models.VehicleListing;
-    const i = client.models.VehicleListingImage;
+    const models = client.models as unknown as Record<
+      string,
+      Partial<{
+        list: unknown;
+        create: unknown;
+        update: unknown;
+        delete: unknown;
+      }>
+    >;
+    const v = models.VehicleListing;
+    const i = models.VehicleListingImage;
     return Boolean(
-      v?.list &&
-        i?.list &&
-        v.create &&
-        v.update &&
-        v.delete &&
-        i.create &&
-        i.update &&
-        i.delete,
+      typeof v?.list === "function" &&
+        typeof i?.list === "function" &&
+        typeof v.create === "function" &&
+        typeof v.update === "function" &&
+        typeof v.delete === "function" &&
+        typeof i.create === "function" &&
+        typeof i.update === "function" &&
+        typeof i.delete === "function",
     );
   }, []);
 
@@ -289,18 +298,35 @@ export default function AdminVehiculosPage() {
     });
   };
 
-  const buildVehiclePayload = () => {
+  const buildVehiclePayload = ():
+    | { readonly ok: false; readonly error: string }
+    | {
+        readonly ok: true;
+        readonly payload: {
+          name: string;
+          year?: number;
+          kmLabel?: string;
+          engine?: string;
+          power?: string;
+          trans?: string;
+          priceLabel?: string;
+          badge?: string;
+          sortOrder: number;
+          isPublished: boolean;
+        };
+      } => {
     const name = form.name.trim();
     const yearRaw = form.year.trim();
     let year: number | undefined;
     if (yearRaw) {
       const n = Number.parseInt(yearRaw, 10);
       if (Number.isNaN(n)) {
-        return { error: "Año inválido." as const };
+        return { ok: false, error: "Año inválido." };
       }
       year = n;
     }
     return {
+      ok: true,
       payload: {
         name,
         ...(year !== undefined ? { year } : {}),
@@ -409,7 +435,7 @@ export default function AdminVehiculosPage() {
     }
 
     const built = buildVehiclePayload();
-    if ("error" in built) {
+    if (!built.ok) {
       setError(built.error);
       return;
     }

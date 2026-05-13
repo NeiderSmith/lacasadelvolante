@@ -107,20 +107,31 @@ export default function AdminGaleriaPage() {
   };
 
   const modelsOk = useCallback(() => {
-    configureAmplifyClient();
+    if (!configureAmplifyClient()) return false;
     const c = adminDataClient();
-    const cat = c.models.GalleryCategory;
-    const it = c.models.GalleryItem;
-    const link = c.models.GalleryItemCategoryLink;
+    // Con outputs antiguos pueden faltar modelos en runtime; el tipo Schema
+    // siempre declara los métodos, por eso se usa una vista laxa.
+    const m = c.models as unknown as Record<
+      string,
+      Partial<{
+        list: unknown;
+        create: unknown;
+        update: unknown;
+        delete: unknown;
+      }>
+    >;
+    const cat = m.GalleryCategory;
+    const it = m.GalleryItem;
+    const link = m.GalleryItemCategoryLink;
     return Boolean(
-      cat?.list &&
-        it?.list &&
-        it.create &&
-        it.update &&
-        it.delete &&
-        link?.list &&
-        link.create &&
-        link.delete,
+      typeof cat?.list === "function" &&
+        typeof it?.list === "function" &&
+        typeof it.create === "function" &&
+        typeof it.update === "function" &&
+        typeof it.delete === "function" &&
+        typeof link?.list === "function" &&
+        typeof link.create === "function" &&
+        typeof link.delete === "function",
     );
   }, []);
 
