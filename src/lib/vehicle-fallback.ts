@@ -26,6 +26,8 @@ export const featuredVehicleFallback: readonly VehicleListingDisplay[] = [
 
     badge: "Destacado",
 
+    vehicleBrand: "BMW",
+
     alt: "Vehículo en venta — SUV Bucaramanga (placeholder)",
 
     imageUrl: null,
@@ -52,6 +54,8 @@ export const featuredVehicleFallback: readonly VehicleListingDisplay[] = [
 
     badge: null,
 
+    vehicleBrand: "Mercedes-Benz",
+
     alt: "Vehículo en venta — berlina Santander (placeholder)",
 
     imageUrl: null,
@@ -77,6 +81,8 @@ export const featuredVehicleFallback: readonly VehicleListingDisplay[] = [
     price: "$142.000.000",
 
     badge: "Nuevo ingreso",
+
+    vehicleBrand: "Toyota",
 
     alt: "Vehículo en venta — coupé Floridablanca (placeholder)",
 

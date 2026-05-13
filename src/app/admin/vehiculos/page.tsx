@@ -7,6 +7,7 @@ import {
   removeVehicleListingImage,
   uploadVehicleListingImage,
 } from "@/lib/amplify/vehicle-image-storage";
+import { LatamBrandSelect } from "@/components/admin/LatamBrandSelect";
 import { adminDataClient } from "@/lib/amplify/admin-data-client";
 import { configureAmplifyClient } from "@/lib/amplify/configure";
 import {
@@ -22,6 +23,7 @@ import { VEHICLE_IMAGE_S3_PREFIX } from "@/lib/storage-paths";
 type VehicleRow = {
   readonly id: string;
   name: string;
+  vehicleBrand: string | null;
   year: number | null;
   kmLabel: string | null;
   engine: string | null;
@@ -48,6 +50,7 @@ type VehicleImageDraft = {
 
 const emptyForm = {
   name: "",
+  vehicleBrand: "",
   year: "",
   kmLabel: "",
   engine: "",
@@ -304,6 +307,7 @@ export default function AdminVehiculosPage() {
         readonly ok: true;
         readonly payload: {
           name: string;
+          vehicleBrand?: string;
           year?: number;
           kmLabel?: string;
           engine?: string;
@@ -329,6 +333,7 @@ export default function AdminVehiculosPage() {
       ok: true,
       payload: {
         name,
+        vehicleBrand: form.vehicleBrand.trim() || undefined,
         ...(year !== undefined ? { year } : {}),
         kmLabel: form.kmLabel.trim() || undefined,
         engine: form.engine.trim() || undefined,
@@ -489,6 +494,7 @@ export default function AdminVehiculosPage() {
     setError(null);
     setForm({
       name: r.name,
+      vehicleBrand: r.vehicleBrand ?? "",
       year: r.year != null ? String(r.year) : "",
       kmLabel: r.kmLabel ?? "",
       engine: r.engine ?? "",
@@ -647,6 +653,7 @@ export default function AdminVehiculosPage() {
                   <div>
                     <p className="font-medium text-white">{r.name}</p>
                     <p className="text-xs text-zinc-500">
+                      {r.vehicleBrand ? `${r.vehicleBrand} · ` : ""}
                       {r.year ?? "—"} · orden {r.sortOrder ?? 0}
                       {r.priceLabel ? ` · ${r.priceLabel}` : ""}
                     </p>
@@ -727,6 +734,15 @@ export default function AdminVehiculosPage() {
                     placeholder="ej. SUV ejecutiva AWD"
                   />
                 </label>
+                <div className="flex flex-col gap-1 text-sm">
+                  <span className="text-zinc-400">Marca (opcional)</span>
+                  <LatamBrandSelect
+                    value={form.vehicleBrand}
+                    onChange={(next) =>
+                      setForm((f) => ({ ...f, vehicleBrand: next }))
+                    }
+                  />
+                </div>
                 <label className="flex flex-col gap-1 text-sm">
                   <span className="text-zinc-400">Año</span>
                   <input

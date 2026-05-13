@@ -77,6 +77,8 @@ const schema = a.schema({
   VehicleListing: a
     .model({
       name: a.string().required(),
+      /** Marca (selector LATAM en admin; opcional). */
+      vehicleBrand: a.string(),
       year: a.integer(),
       kmLabel: a.string(),
       engine: a.string(),

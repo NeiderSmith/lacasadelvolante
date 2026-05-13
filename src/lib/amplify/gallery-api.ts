@@ -9,6 +9,7 @@ import type {
   GalleryCategoryDisplay,
   GalleryLayoutType,
   GalleryWorkDisplay,
+  GalleryWorkTile,
 } from "@/lib/gallery-types";
 import { configureAmplifyClient } from "@/lib/amplify/configure";
 
@@ -161,3 +162,35 @@ export const fetchPublishedGalleryCategories =
 
     return mapped;
   };
+
+/** Une categorías en fichas únicas por `GalleryItem` (mantiene todas las categorías asociadas). */
+export const buildGalleryWorkTiles = (
+  categories: readonly GalleryCategoryDisplay[],
+): GalleryWorkTile[] => {
+  const byId = new Map<
+    string,
+    { work: GalleryWorkDisplay; slugs: Set<string>; labels: Set<string> }
+  >();
+  for (const cat of categories) {
+    for (const w of cat.works) {
+      const cur = byId.get(w.id);
+      if (!cur) {
+        byId.set(w.id, {
+          work: w,
+          slugs: new Set([cat.slug]),
+          labels: new Set([cat.label]),
+        });
+      } else {
+        cur.slugs.add(cat.slug);
+        cur.labels.add(cat.label);
+      }
+    }
+  }
+  return [...byId.values()]
+    .map(({ work, slugs, labels }) => ({
+      ...work,
+      categorySlugs: [...slugs],
+      categoryLabels: [...labels],
+    }))
+    .sort((a, b) => a.sortOrder - b.sortOrder || a.title.localeCompare(b.title));
+};

@@ -19,3 +19,9 @@ export type GalleryCategoryDisplay = {
   readonly coverImageUrl: string | null;
   readonly works: readonly GalleryWorkDisplay[];
 };
+
+/** Ítem plano para mosaico (un recurso puede estar en varias categorías). */
+export type GalleryWorkTile = GalleryWorkDisplay & {
+  readonly categorySlugs: readonly string[];
+  readonly categoryLabels: readonly string[];
+};

@@ -3,6 +3,7 @@ import {
   businessAddress,
   instagramHref,
   siteUrl,
+  tiktokHref,
   whatsappE164,
 } from "@/lib/site-config";
 
@@ -30,7 +31,7 @@ export const buildLocalBusinessJsonLd = (): string => {
       { "@type": "City", name: "Piedecuesta" },
       { "@type": "AdministrativeArea", name: "Santander" },
     ],
-    sameAs: [instagramHref],
+    sameAs: [instagramHref, tiktokHref],
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],

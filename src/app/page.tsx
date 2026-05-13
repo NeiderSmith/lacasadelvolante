@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/landing/Navbar";
 import { HeroSection } from "@/components/landing/HeroSection";
-import { ServicesSection } from "@/components/landing/ServicesSection";
 import { GallerySection } from "@/components/landing/GallerySection";
 import { FeaturedVehiclesSection } from "@/components/landing/FeaturedVehiclesSection";
 import { PreFooterCtaSection } from "@/components/landing/PreFooterCtaSection";
@@ -13,7 +12,6 @@ export default function HomePage() {
       <Navbar />
       <main id="contenido-principal" className="flex-1">
         <HeroSection />
-        <ServicesSection />
         <GallerySection />
         <FeaturedVehiclesSection />
         <PreFooterCtaSection />

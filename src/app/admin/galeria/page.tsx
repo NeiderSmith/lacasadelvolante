@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { LatamBrandSelect } from "@/components/admin/LatamBrandSelect";
 import {
   assertGalleryItemImageFile,
   getGalleryWorkImageUrl,
@@ -763,17 +764,14 @@ export default function AdminGaleriaPage() {
                   )}
                 </fieldset>
 
-                <label className="flex flex-col gap-1 text-sm">
+                <div className="flex flex-col gap-1 text-sm">
                   <span className="text-zinc-400">Marca del vehículo (opcional)</span>
-                  <input
+                  <LatamBrandSelect
+                    id="gallery-item-brand"
                     value={form.vehicleBrand}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, vehicleBrand: e.target.value }))
-                    }
-                    className="rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-white"
-                    placeholder="ej. Mercedes-Benz"
+                    onChange={(next) => setForm((f) => ({ ...f, vehicleBrand: next }))}
                   />
-                </label>
+                </div>
                 <fieldset className="grid gap-2 rounded-lg border border-zinc-800 p-3">
                   <legend className="px-1 text-sm text-zinc-400">Tipo de recurso</legend>
                   <label className="flex cursor-pointer items-center gap-2 text-sm text-zinc-300">

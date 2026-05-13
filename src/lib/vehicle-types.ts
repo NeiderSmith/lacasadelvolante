@@ -18,6 +18,9 @@ export type VehicleListingDisplay = {
 
   badge: string | null;
 
+  /** Marca (mismo listado LATAM que en galería admin). */
+  vehicleBrand: string | null;
+
   alt: string;
 
   /** URL firmada o pública; null → placeholder en UI */

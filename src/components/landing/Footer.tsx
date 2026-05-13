@@ -3,6 +3,7 @@ import {
   businessAddress,
   instagramHref,
   siteUrl,
+  tiktokHref,
   whatsappE164,
   whatsappHref,
 } from "@/lib/site-config";
@@ -73,6 +74,16 @@ export const Footer = () => {
                   rel="noopener noreferrer"
                 >
                   Instagram
+                </a>
+              </li>
+              <li>
+                <a
+                  href={tiktokHref}
+                  className="hover:text-lcdv-text"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  TikTok
                 </a>
               </li>
               <li>

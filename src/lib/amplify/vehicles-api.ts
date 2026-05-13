@@ -84,6 +84,7 @@ export const fetchPublishedVehicleListings =
           trans: r.trans?.trim() || "—",
           price: r.priceLabel?.trim() || "Consultar",
           badge: r.badge?.trim() || null,
+          vehicleBrand: r.vehicleBrand?.trim() || null,
           alt:
             primary?.imageAlt?.trim() ||
             `${r.name} — vehículo en venta La Casa del Volante`,
