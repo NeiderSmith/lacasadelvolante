@@ -1,0 +1,68 @@
+{
+    "brand": "La Casa del Volante",
+    "palette": {
+      "primaryBackground": {
+        "name": "Deep Black Blue",
+        "hex": "#01070E",
+        "rgb": "1, 7, 14",
+        "usage": "Fondos principales, secciones oscuras, navbar"
+      },
+      "primaryGold": {
+        "name": "Luxury Gold",
+        "hex": "#956525",
+        "rgb": "149, 101, 37",
+        "usage": "Color principal del logo, botones destacados, títulos"
+      },
+      "secondaryGold": {
+        "name": "Warm Bronze Gold",
+        "hex": "#6A4E28",
+        "rgb": "106, 78, 40",
+        "usage": "Hover states, bordes, elementos secundarios"
+      },
+      "darkBronze": {
+        "name": "Dark Bronze",
+        "hex": "#513317",
+        "rgb": "81, 51, 23",
+        "usage": "Sombras, gradientes, detalles elegantes"
+      },
+      "highlightGold": {
+        "name": "Bright Gold",
+        "hex": "#DA992B",
+        "rgb": "218, 153, 43",
+        "usage": "Highlights, efectos brillantes, iconos"
+      },
+      "softGold": {
+        "name": "Soft Metallic Gold",
+        "hex": "#D3AB56",
+        "rgb": "211, 171, 86",
+        "usage": "Gradientes suaves, fondos premium"
+      },
+      "mutedGold": {
+        "name": "Muted Gold",
+        "hex": "#AE904F",
+        "rgb": "174, 144, 79",
+        "usage": "Texto secundario y detalles sutiles"
+      },
+      "lightGold": {
+        "name": "Light Gold Accent",
+        "hex": "#F4CF65",
+        "rgb": "244, 207, 101",
+        "usage": "Reflejos, acentos visuales premium"
+      }
+    },
+    "recommendedGradients": [
+      {
+        "name": "Luxury Gold Gradient",
+        "css": "linear-gradient(90deg, #513317 0%, #956525 50%, #F4CF65 100%)"
+      },
+      {
+        "name": "Dark Elegant Background",
+        "css": "linear-gradient(180deg, #01070E 0%, #0A111A 100%)"
+      }
+    ],
+    "recommendedTextColors": {
+      "primaryTextOnDark": "#F4CF65",
+      "secondaryTextOnDark": "#D3AB56",
+      "darkTextOnGold": "#01070E"
+    }
+  }
