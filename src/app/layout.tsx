@@ -31,6 +31,7 @@ const keywords = [
   "restauración de vehículos Bucaramanga",
   "tapizado de asientos Bucaramanga",
   "restauración de tableros Bucaramanga",
+  "tapizado de palancas Bucaramanga",
   "Floridablanca tapicería",
   "Girón tapicería automotriz",
   "Piedecuesta restauración interiores",
@@ -116,6 +117,9 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans min-h-dvh flex flex-col antialiased">
+        <a href="#contenido-principal" className="lcdv-skip-link">
+          Saltar al contenido principal
+        </a>
         {children}
       </body>
     </html>

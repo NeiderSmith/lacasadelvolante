@@ -10,6 +10,7 @@ import {
 } from "@/lib/site-config";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { TikTokGlyph } from "@/components/landing/TikTokGlyph";
 
 const navLinks = [
@@ -17,14 +18,24 @@ const navLinks = [
   { href: "#servicios", label: "Servicios" },
   { href: "#galeria", label: "Galería" },
   { href: "#vehiculos", label: "Vehículos" },
+  { href: "#ubicacion", label: "Ubicación" },
   { href: "#contacto", label: "Contacto" },
 ];
+
+const resolveNavHref = (hashHref: string, pathname: string) => {
+  if (hashHref === "#vehiculos" && pathname === "/vehiculos") return "/vehiculos";
+  if (pathname === "/") return hashHref;
+  return `/${hashHref}`;
+};
 
 const telHref = `tel:+${whatsappE164}`;
 
 export const Navbar = () => {
+  const pathname = usePathname();
+  const path = pathname ?? "/";
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
+  const logoHref = path === "/" ? "#inicio" : "/#inicio";
 
   useMotionValueEvent(scrollY, "change", (y) => {
     setScrolled(y > 48);
@@ -100,7 +111,7 @@ export const Navbar = () => {
       >
         <div className="relative mx-auto flex h-14 max-w-7xl items-center justify-between gap-3 px-4 sm:h-16 sm:px-6 lg:px-8">
           <a
-            href="#inicio"
+            href={logoHref}
             className="shrink-0 font-display text-base font-semibold tracking-tight sm:text-lg"
             aria-label={`${brandName}, ir al inicio`}
           >
@@ -121,8 +132,8 @@ export const Navbar = () => {
             {navLinks.map((link) => (
               <a
                 key={link.href}
-                href={link.href}
-                className={`text-sm font-medium transition-colors ${
+                href={resolveNavHref(link.href, path)}
+                className={`rounded-md px-1 py-0.5 text-sm font-medium transition-colors ${
                   scrolled ? "text-lcdv-text-2 hover:text-lcdv-text" : "text-white/85 hover:text-white"
                 }`}
               >
@@ -136,7 +147,7 @@ export const Navbar = () => {
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center bg-lcdv-highlight px-4 py-2 font-sans text-xs font-bold uppercase tracking-wide text-lcdv-text-dark transition hover:brightness-110 sm:px-5 sm:text-sm"
+              className="lcdv-btn-primary min-h-[44px] px-4 text-xs sm:px-5 sm:text-sm"
               aria-label="Cotizar ahora por WhatsApp"
             >
               Cotizar ahora
@@ -153,9 +164,9 @@ export const Navbar = () => {
           {navLinks.map((link) => (
             <a
               key={link.href}
-              href={link.href}
-              className={`whitespace-nowrap text-xs font-medium ${
-                scrolled ? "text-lcdv-text-2" : "text-white/80"
+              href={resolveNavHref(link.href, path)}
+              className={`whitespace-nowrap rounded-md px-2 py-1 text-xs font-medium transition-colors ${
+                scrolled ? "text-lcdv-text-2 hover:text-lcdv-text" : "text-white/80 hover:text-white"
               }`}
             >
               {link.label}

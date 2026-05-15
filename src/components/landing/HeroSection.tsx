@@ -1,123 +1,61 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { instagramHref, tiktokHref, whatsappHref } from "@/lib/site-config";
 import { LANDING_SERVICES } from "@/lib/landing-services";
 import { TikTokGlyph } from "@/components/landing/TikTokGlyph";
+import { ServiceIcon } from "@/components/landing/ServiceIcon";
 
-const HeroServiceIcon = ({ serviceId }: { readonly serviceId: string }) => {
-  const common = "h-7 w-7 shrink-0 text-lcdv-text-dark";
-  switch (serviceId) {
-    case "volantes":
-      return (
-        <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden>
-          <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5" />
-          <circle cx="12" cy="12" r="2" fill="currentColor" />
-          <path
-            d="M12 4v2M12 18v2M4 12h2M18 12h2M6.34 6.34l1.42 1.42M16.24 16.24l1.42 1.42M6.34 17.66l1.42-1.42M16.24 7.76l1.42-1.42"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
+const HERO_PORTRAIT_IMAGES = ["/Paez.jpg", "/Paez2.jpg", "/Negocio2.jpg"] as const;
+const PORTRAIT_CROSSFADE_INTERVAL_MS = 5000;
+const PORTRAIT_FADE_DURATION_S = 1.1;
+
+const HeroPortraitCrossfade = () => {
+  const prefersReducedMotion = useReducedMotion();
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    const id = window.setInterval(() => {
+      setActiveIndex((i) => (i + 1) % HERO_PORTRAIT_IMAGES.length);
+    }, PORTRAIT_CROSSFADE_INTERVAL_MS);
+    return () => window.clearInterval(id);
+  }, [prefersReducedMotion]);
+
+  return (
+    <figure
+      className="relative aspect-square w-full max-w-[min(100%,400px)] overflow-hidden rounded-lg border border-lcdv-highlight/35 bg-black/25 shadow-[0_24px_60px_rgba(0,0,0,0.55)] ring-1 ring-white/10 lg:max-w-[400px]"
+      aria-label="La Casa del Volante — Bucaramanga"
+    >
+      {HERO_PORTRAIT_IMAGES.map((src, index) => (
+        <motion.div
+          key={src}
+          animate={{ opacity: activeIndex === index ? 1 : 0 }}
+          transition={{ duration: PORTRAIT_FADE_DURATION_S, ease: "easeInOut" }}
+          className="absolute inset-0"
+          aria-hidden={activeIndex !== index}
+        >
+          <Image
+            src={src}
+            alt=""
+            fill
+            priority={index === 0}
+            sizes="(max-width: 1024px) 90vw, 420px"
+            className="object-contain object-center"
           />
-        </svg>
-      );
-    case "tableros":
-      return (
-        <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden>
-          <rect
-            x="3"
-            y="5"
-            width="18"
-            height="12"
-            rx="2"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
-          <path
-            d="M7 9h4M7 13h10"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <circle cx="17" cy="10" r="1.5" fill="currentColor" />
-        </svg>
-      );
-    case "asientos":
-      return (
-        <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden>
-          <path
-            d="M5 16c0-2.5 2-4 7-4s7 1.5 7 4v2H5v-2z"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M8 12V9a4 4 0 0 1 8 0v3"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-        </svg>
-      );
-    case "interiores":
-      return (
-        <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden>
-          <path
-            d="M4 17l2-8h12l2 8"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M6 9V7a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v2"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
-          <path d="M9 14h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
-      );
-    case "venta-vehiculos":
-      return (
-        <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden>
-          <path
-            d="M3 13h1l1.5-4h11L18 13h1"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <circle cx="7.5" cy="16.5" r="1.5" stroke="currentColor" strokeWidth="1.5" />
-          <circle cx="16.5" cy="16.5" r="1.5" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M5 16H4M20 16h-1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
-      );
-    case "tasacion":
-      return (
-        <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden>
-          <path
-            d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
-          <path d="M9 12h6M9 16h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
-      );
-    default:
-      return (
-        <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden>
-          <circle cx="12" cy="12" r="7" stroke="currentColor" strokeWidth="1.5" />
-        </svg>
-      );
-  }
+        </motion.div>
+      ))}
+    </figure>
+  );
 };
+
+const HERO_TRUST_POINTS = [
+  "Materiales premium",
+  "Garantia del servicio",
+  "Cotización por WhatsApp",
+] as const;
 
 const socialIconClass =
   "flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-sm transition hover:border-lcdv-highlight hover:bg-lcdv-highlight/20 hover:text-lcdv-highlight";
@@ -131,7 +69,7 @@ export const HeroSection = () => {
     >
       <div className="absolute inset-0">
         <Image
-          src="/fondo9.webp"
+          src="/fondo.png"
           alt="Taller e interiores automotrices — La Casa del Volante, Bucaramanga"
           fill
           priority
@@ -140,7 +78,7 @@ export const HeroSection = () => {
         />
         <div className="absolute inset-0 bg-black/54" aria-hidden />
         <div
-          className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/30 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/20 lg:via-black/30 lg:to-transparent"
           aria-hidden
         />
         <div
@@ -151,7 +89,8 @@ export const HeroSection = () => {
 
       <div className="relative z-10 flex min-h-0 flex-1 flex-col px-4 pb-0 pt-40 sm:px-6 sm:pt-44 lg:px-8 lg:pt-32">
         <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center py-8 lg:py-12">
-          <div className="max-w-3xl">
+          <motion.div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(280px,380px)] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_minmax(300px,420px)] xl:gap-16">
+            <div className="max-w-3xl">
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -178,7 +117,9 @@ export const HeroSection = () => {
               className="mt-6 max-w-xl font-sans text-sm leading-relaxed text-white/95 drop-shadow-[0_1px_10px_rgba(0,0,0,0.85)] sm:text-base lg:text-lg"
             >
               Restauración de interiores, tapizado de volantes y asientos, y compra venta de
-              vehículos curados. Atención en Bucaramanga, Floridablanca, Girón y Piedecuesta.
+              vehículos.
+              <br />
+              Atención en Bucaramanga, Floridablanca, Girón y Piedecuesta.
             </motion.p>
 
             <motion.div
@@ -189,7 +130,7 @@ export const HeroSection = () => {
             >
               <a
                 href="#servicios"
-                className="inline-flex min-h-[48px] min-w-[200px] items-center justify-center bg-lcdv-highlight px-8 py-3 font-sans text-sm font-bold uppercase tracking-wide text-lcdv-text-dark shadow-lg transition hover:brightness-110"
+                className="lcdv-btn-primary min-w-[200px]"
                 aria-label="Ver servicios detallados"
               >
                 Conocer más
@@ -198,13 +139,12 @@ export const HeroSection = () => {
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[48px] items-center justify-center border-2 border-white/40 px-8 py-3 font-sans text-sm font-semibold uppercase tracking-wide text-white transition hover:border-lcdv-highlight hover:text-lcdv-highlight"
+                className="lcdv-btn-ghost-light"
                 aria-label="Solicitar cotización por WhatsApp"
               >
                 Cotizar ahora
               </a>
             </motion.div>
-
             <motion.nav
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -249,7 +189,17 @@ export const HeroSection = () => {
                 </a>
               </div>
             </motion.nav>
-          </div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.12, duration: 0.55 }}
+              className="relative hidden w-full max-w-none justify-self-end lg:mx-0 lg:block lg:max-w-[400px]"
+            >
+              <HeroPortraitCrossfade />
+            </motion.div>
+          </motion.div>
         </div>
 
         <div className="mt-auto w-full border-t border-black/20 bg-lcdv-highlight">
@@ -266,7 +216,7 @@ export const HeroSection = () => {
                 transition={{ delay: 0.08 + i * 0.04, duration: 0.35 }}
                 className="group flex flex-col items-center gap-2 text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lcdv-text-dark"
               >
-                <HeroServiceIcon serviceId={s.id} />
+                <ServiceIcon serviceId={s.id} className="h-7 w-7 text-lcdv-text-dark" />
                 <span className="font-sans text-xs font-bold uppercase tracking-wide text-lcdv-text-dark sm:text-sm">
                   {s.barLabel}
                 </span>

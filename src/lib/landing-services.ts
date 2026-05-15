@@ -20,6 +20,12 @@ export const LANDING_SERVICES: readonly LandingService[] = [
     desc: "Cuero, alcántara y detalles metálicos. Restauración de tableros Santander.",
   },
   {
+    id: "palancas",
+    barLabel: "Palancas",
+    title: "Palancas y perillas",
+    desc: "Forrado, costura y acabados premium en palanca de cambios, freno de mano y perillas.",
+  },
+  {
     id: "asientos",
     barLabel: "Asientos",
     title: "Asientos y cielo raso",
@@ -29,18 +35,12 @@ export const LANDING_SERVICES: readonly LandingService[] = [
     id: "interiores",
     barLabel: "Interiores",
     title: "Interiores a medida",
-    desc: "Consolas, palancas e identidad exclusiva para tu vehículo.",
+    desc: "Consolas, paneles y acabados integrados con identidad exclusiva para tu vehículo.",
   },
   {
     id: "venta-vehiculos",
     barLabel: "Vehículos",
     title: "Compra y venta de vehículos",
     desc: "Inventario curado y asesoría en venta de carros usados premium.",
-  },
-  {
-    id: "tasacion",
-    barLabel: "Tasación",
-    title: "Peritaje y tasación",
-    desc: "Evaluación transparente para compra o venta en el área metropolitana.",
   },
 ] as const;

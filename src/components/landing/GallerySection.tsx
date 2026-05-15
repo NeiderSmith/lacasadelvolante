@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { hasAmplifyOutputsEnv } from "@/lib/amplify/configure";
 import { useGalleryMosaic } from "@/hooks/use-gallery-mosaic";
 import type { GalleryWorkTile } from "@/lib/gallery-types";
+import { SectionHeader } from "@/components/landing/SectionHeader";
 
 const PAGE_SLOT_CAPACITY = 12;
 
@@ -352,16 +353,6 @@ export const GallerySection = () => {
   const safePage = Math.min(page, pageCount);
   const slice = slotPages[safePage - 1] ?? [];
 
-  const usedSlotsOnPage = useMemo(
-    () => slice.reduce((acc, t) => acc + tileSlotCount(t), 0),
-    [slice],
-  );
-
-  const firstPagePlaceholderSlots =
-    !loading && safePage === 1 && slice.length > 0 && usedSlotsOnPage < PAGE_SLOT_CAPACITY
-      ? PAGE_SLOT_CAPACITY - usedSlotsOnPage
-      : 0;
-
   useEffect(() => {
     setPage(1);
   }, [categorySlug, brand, searchQuery, tiles.length]);
@@ -375,22 +366,21 @@ export const GallerySection = () => {
   return (
     <section
       id="galeria"
-      className="scroll-mt-28 border-t border-lcdv-gold-2/12 bg-lcdv-bg"
+      className="lcdv-section-textured scroll-mt-28 border-t border-lcdv-gold-2/12"
       aria-labelledby="galeria-heading"
     >
-      <div className="mx-auto max-w-7xl px-4 pb-3 pt-10 sm:px-6 sm:pb-4 sm:pt-12 lg:px-8">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-lcdv-gold">
-          Trabajos realizados
-        </p>
-        <h2
-          id="galeria-heading"
-          className="mt-3 font-display text-3xl font-semibold leading-tight text-lcdv-text sm:text-4xl"
-        >
-          Galería
-        </h2>
+      <div className="lcdv-container pb-3 pt-10 sm:pb-4 sm:pt-12">
+        <SectionHeader
+          eyebrow="Trabajos realizados"
+          title="Galería de restauraciones"
+          titleId="galeria-heading"
+          description="Filtra por categoría, marca o palabra clave. Haz clic en cualquier trabajo para ver el detalle en pantalla completa."
+          variant="on-textured"
+          className="max-w-3xl"
+        />
       </div>
 
-      <div className="sticky top-14 z-20 border-b border-lcdv-gold-2/10 bg-lcdv-bg/90 py-3 backdrop-blur-md sm:top-16">
+      <div className="lcdv-textured-sticky-bar sticky top-14 z-20 py-3 sm:top-16">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-3 sm:px-4 lg:flex-row lg:items-stretch lg:gap-4 lg:px-8">
           <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-1">
             <label
@@ -406,7 +396,7 @@ export const GallerySection = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Título o descripción…"
               autoComplete="off"
-              className="min-h-[44px] w-full rounded-md border border-lcdv-gold-2/35 bg-lcdv-bg px-3 py-2 text-sm text-lcdv-text placeholder:text-lcdv-muted/90 focus-visible:border-lcdv-highlight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-lcdv-highlight"
+              className="lcdv-input"
               aria-label="Buscar en la galería por título o descripción"
             />
           </div>
@@ -423,7 +413,7 @@ export const GallerySection = () => {
                 value={categorySlug}
                 onChange={(e) => setCategorySlug(e.target.value)}
                 aria-label="Filtrar por categoría"
-                className="min-h-[44px] w-full rounded-md border border-lcdv-gold-2/30 bg-lcdv-bg px-3 py-2 text-sm font-medium text-lcdv-text"
+                className="lcdv-input font-medium"
               >
                 <option value="">Todas</option>
                 {categoryFilters.map((c) => (
@@ -445,7 +435,7 @@ export const GallerySection = () => {
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
                 aria-label="Filtrar por marca del vehículo"
-                className="min-h-[44px] w-full rounded-md border border-lcdv-gold-2/30 bg-lcdv-bg px-3 py-2 text-sm font-medium text-lcdv-text"
+                className="lcdv-input font-medium"
               >
                 <option value="">Todas</option>
                 {brandOptions.map((b) => (
@@ -477,7 +467,7 @@ export const GallerySection = () => {
 
         {showEmpty ? (
           <div
-            className="flex min-h-[30vh] items-center justify-center rounded-md border border-dashed border-lcdv-gold-2/20 bg-lcdv-bronze/10"
+            className="lcdv-textured-panel flex min-h-[30vh] items-center justify-center border-dashed"
             role="status"
           >
             <span className="sr-only">No hay imágenes publicadas en la galería</span>
@@ -486,7 +476,7 @@ export const GallerySection = () => {
 
         {!loading && slice.length === 0 && tiles.length > 0 ? (
           <div
-            className="flex min-h-[24vh] items-center justify-center rounded-md border border-lcdv-gold-2/15 bg-lcdv-bronze/10"
+            className="lcdv-textured-panel flex min-h-[24vh] items-center justify-center"
             role="status"
           >
             <span className="sr-only">Sin resultados con los filtros seleccionados</span>
@@ -511,13 +501,6 @@ export const GallerySection = () => {
                   />
                 ),
               )}
-              {Array.from({ length: firstPagePlaceholderSlots }).map((_, i) => (
-                <li
-                  key={`gallery-page-placeholder-${i}`}
-                  aria-hidden
-                  className="h-full min-h-0 rounded-md border border-dashed border-lcdv-gold-2/30 bg-lcdv-bronze/12 ring-1 ring-lcdv-highlight/15"
-                />
-              ))}
             </ul>
 
             <nav

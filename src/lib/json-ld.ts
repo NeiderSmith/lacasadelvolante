@@ -20,6 +20,7 @@ export const buildLocalBusinessJsonLd = (): string => {
     priceRange: "$$$",
     address: {
       "@type": "PostalAddress",
+      streetAddress: businessAddress.streetAddress,
       addressLocality: businessAddress.addressLocality,
       addressRegion: businessAddress.addressRegion,
       addressCountry: businessAddress.addressCountry,
