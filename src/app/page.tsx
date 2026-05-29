@@ -6,6 +6,7 @@ import { GallerySection } from "@/components/landing/GallerySection";
 import { VehicleBrandsMarquee } from "@/components/landing/VehicleBrandsMarquee";
 import { FeaturedVehiclesSection } from "@/components/landing/FeaturedVehiclesSection";
 import { LocationSection } from "@/components/landing/LocationSection";
+import { FaqSection } from "@/components/landing/FaqSection";
 import { Footer } from "@/components/landing/Footer";
 import { FloatingWhatsApp } from "@/components/landing/FloatingWhatsApp";
 
@@ -21,6 +22,7 @@ export default function HomePage() {
         <GallerySection />
         <FeaturedVehiclesSection />
         <LocationSection />
+        <FaqSection />
       </main>
       <Footer />
       <FloatingWhatsApp />

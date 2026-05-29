@@ -13,19 +13,14 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { TikTokGlyph } from "@/components/landing/TikTokGlyph";
 
-const navLinks = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#servicios", label: "Servicios" },
-  { href: "#galeria", label: "Galería" },
-  { href: "#vehiculos", label: "Vehículos" },
-  { href: "#ubicacion", label: "Ubicación" },
-  { href: "#contacto", label: "Contacto" },
-];
+import { homeSectionLinks, resolveSiteHref } from "@/lib/site-nav";
 
-const resolveNavHref = (hashHref: string, pathname: string) => {
-  if (hashHref === "#vehiculos" && pathname === "/vehiculos") return "/vehiculos";
-  if (pathname === "/") return hashHref;
-  return `/${hashHref}`;
+const navLinks = homeSectionLinks;
+
+const resolveNavHref = (href: string, pathname: string) => {
+  if (href.startsWith("/") && !href.startsWith("/#")) return href;
+  if (href === "#vehiculos" && pathname === "/vehiculos") return "/vehiculos";
+  return resolveSiteHref(href);
 };
 
 const telHref = `tel:+${whatsappE164}`;

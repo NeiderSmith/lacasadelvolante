@@ -1,4 +1,5 @@
 import { brandName } from "@/lib/design-tokens";
+import { homeSectionLinks, legalLinks, resolveSiteHref } from "@/lib/site-nav";
 import {
   businessAddress,
   instagramHref,
@@ -9,12 +10,12 @@ import {
 } from "@/lib/site-config";
 
 const quickLinks = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#servicios", label: "Servicios" },
-  { href: "#galeria", label: "Galería" },
-  { href: "#vehiculos", label: "Vehículos" },
-  { href: "#ubicacion", label: "Ubicación" },
-  { href: "#contacto", label: "Contacto" },
+  ...homeSectionLinks.map((link) =>
+    link.href === "#preguntas-frecuentes"
+      ? { href: link.href, label: "Preguntas frecuentes" }
+      : link,
+  ),
+  ...legalLinks,
 ] as const;
 
 const TRUST_BADGES = [
@@ -27,7 +28,8 @@ const TRUST_BADGES = [
 export const Footer = () => {
   return (
     <footer
-      className="lcdv-section-textured border-t border-lcdv-gold-2/20 pb-12 pt-16"
+      id="contacto"
+      className="lcdv-section-textured scroll-mt-28 border-t border-lcdv-gold-2/20 pb-12 pt-16"
       role="contentinfo"
     >
       <div className="lcdv-container">
@@ -58,7 +60,7 @@ export const Footer = () => {
               {quickLinks.map((l) => (
                 <li key={l.href}>
                   <a
-                    href={l.href}
+                    href={resolveSiteHref(l.href)}
                     className="text-sm text-lcdv-text-2 transition-colors hover:text-lcdv-highlight"
                   >
                     {l.label}
@@ -125,11 +127,17 @@ export const Footer = () => {
           <p>
             © {new Date().getFullYear()} {brandName}. Todos los derechos reservados.
           </p>
-          <p className="break-all">
-            <a href={siteUrl} className="transition-colors hover:text-lcdv-text-2">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <a href="/terminos" className="transition-colors hover:text-lcdv-text-2">
+              Términos y condiciones
+            </a>
+            <span aria-hidden className="hidden sm:inline">
+              ·
+            </span>
+            <a href={siteUrl} className="break-all transition-colors hover:text-lcdv-text-2">
               {siteUrl.replace(/^https:\/\//, "")}
             </a>
-          </p>
+          </div>
         </div>
       </div>
     </footer>
