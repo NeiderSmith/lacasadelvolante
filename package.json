@@ -10,12 +10,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "preview:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "build:cloudflare": "opennextjs-cloudflare build",
+    "deploy:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
     "aws-amplify": "^6.17.0",
     "framer-motion": "^12.38.0",
-    "next": "16.2.6",
+    "next": "16.3.5",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "simple-icons": "^16.19.0"
@@ -24,6 +28,7 @@
     "@aws-amplify/backend": "^1.22.0",
     "@aws-amplify/backend-cli": "^1.8.2",
     "@aws-sdk/client-cognito-identity-provider": "^3.1045.0",
+    "@opennextjs/cloudflare": "^1.20.6",
     "@tailwindcss/postcss": "^4",
     "@types/aws-lambda": "^8.10.161",
     "@types/node": "^22",
@@ -33,9 +38,10 @@
     "constructs": "^10.6.0",
     "esbuild": "^0.28.0",
     "eslint": "^9",
-    "eslint-config-next": "16.2.6",
+    "eslint-config-next": "16.3.5",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wrangler": "^4.135.0"
   }
 }

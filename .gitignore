@@ -45,3 +45,8 @@ next-env.d.ts
 .amplify
 amplify_outputs*
 amplifyconfiguration*
+.wrangler/
+.open-next/
+.env.local
+public.zip
+
