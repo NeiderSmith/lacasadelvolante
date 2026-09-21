@@ -14,19 +14,7 @@ export const whatsAppQuoteMessage = encodeURIComponent(
   "Hola La Casa del Volante, quiero información o una cotización. Vengo desde la web.",
 );
 
-export const whatsAppVehicleBuyMessage = encodeURIComponent(
-  "Hola La Casa del Volante, vengo desde la web y quiero información para comprar un vehículo.",
-);
-
-export const whatsAppVehicleSellMessage = encodeURIComponent(
-  "Hola La Casa del Volante, vengo desde la web: quiero vender mi vehículo.",
-);
-
 export const whatsappHref = `https://wa.me/${whatsappE164}?text=${whatsAppQuoteMessage}`;
-
-export const whatsappVehicleBuyHref = `https://wa.me/${whatsappE164}?text=${whatsAppVehicleBuyMessage}`;
-
-export const whatsappVehicleSellHref = `https://wa.me/${whatsappE164}?text=${whatsAppVehicleSellMessage}`;
 
 export const instagramHandle = trim(process.env.NEXT_PUBLIC_INSTAGRAM) || "lacasadelvolante";
 

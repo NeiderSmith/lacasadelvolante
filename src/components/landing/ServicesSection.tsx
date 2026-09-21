@@ -26,7 +26,7 @@ export const ServicesSection = () => {
           eyebrow="Servicios especializados"
           title="Cada detalle de tu interior, con acabado premium"
           titleId="servicios-heading"
-          description="Volantes, tableros, palancas, asientos, interiores completos y compra/venta de vehículos. Trabajamos con materiales de alta gama y procesos transparentes en Bucaramanga y área metropolitana."
+          description="Volantes, tableros, palancas, asientos e interiores completos. Trabajamos con materiales de alta gama y procesos transparentes en Bucaramanga y área metropolitana."
           variant="on-textured"
           className="max-w-3xl"
         />

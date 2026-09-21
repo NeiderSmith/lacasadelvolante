@@ -39,7 +39,7 @@ export const Footer = () => {
               {brandName}
             </span>
             <p className="mt-3 text-sm leading-relaxed text-lcdv-text-2">
-              Tapicería automotriz premium y compra venta de vehículos en Bucaramanga,
+              Tapicería automotriz premium y restauración de interiores en Bucaramanga,
               Santander. Servicio en Floridablanca, Girón y Piedecuesta.
             </p>
             <a
@@ -119,8 +119,7 @@ export const Footer = () => {
 
         <p className="sr-only">
           Tapicería automotriz Bucaramanga, tapicería de carros, restauración de interiores
-          de vehículos, tapizado de volantes, tapizado de asientos, restauración de tableros,
-          compra y venta de vehículos Bucaramanga, venta de carros usados Santander.
+          de vehículos, tapizado de volantes, tapizado de asientos, restauración de tableros.
         </p>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-lcdv-gold-2/15 pt-8 text-xs text-lcdv-muted sm:flex-row sm:items-center sm:justify-between">

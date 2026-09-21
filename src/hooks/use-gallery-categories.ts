@@ -23,10 +23,22 @@ export const useGalleryCategories = () => {
     let cancelled = false;
 
     const load = async () => {
-      const fromApi = await fetchPublishedGalleryCategories();
-      if (cancelled) return;
-      setCategories(fromApi);
-      setLoading(false);
+      try {
+        const fromApi = await fetchPublishedGalleryCategories();
+        if (cancelled) return;
+        setCategories(fromApi);
+      } catch (error) {
+        if (cancelled) return;
+        if (process.env.NODE_ENV === "development") {
+          console.warn(
+            "[Gallery] Amplify no está disponible; usando contenido local de respaldo.",
+            error,
+          );
+        }
+        setCategories([...galleryFallbackCategories]);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
     };
 
     void load();

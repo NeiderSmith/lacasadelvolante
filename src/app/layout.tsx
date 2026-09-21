@@ -26,8 +26,6 @@ const keywords = [
   "restauración de interiores de vehículos Bucaramanga",
   "tapizado de volantes Bucaramanga",
   "tapicería premium automotriz Santander",
-  "compra y venta de vehículos Bucaramanga",
-  "venta de carros usados Bucaramanga",
   "restauración de vehículos Bucaramanga",
   "tapizado de asientos Bucaramanga",
   "restauración de tableros Bucaramanga",
@@ -41,11 +39,11 @@ const keywords = [
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${brandName} | Tapicería premium y vehículos en Bucaramanga`,
+    default: `${brandName} | Tapicería premium en Bucaramanga`,
     template: `%s | ${brandName}`,
   },
   description:
-    "Tapicería automotriz premium en Bucaramanga: tapizado de volantes y asientos, restauración de tableros e interiores, y compra venta de vehículos en Santander. Atendemos Floridablanca, Girón y Piedecuesta.",
+    "Tapicería automotriz premium en Bucaramanga: tapizado de volantes y asientos, restauración de tableros e interiores. Atendemos Floridablanca, Girón y Piedecuesta.",
   keywords,
   authors: [{ name: brandName }],
   creator: brandName,
@@ -60,15 +58,15 @@ export const metadata: Metadata = {
     locale: "es_CO",
     url: siteUrl,
     siteName: brandName,
-    title: `${brandName} | Tapicería premium y vehículos Bucaramanga`,
+    title: `${brandName} | Tapicería premium Bucaramanga`,
     description:
-      "Especialistas en tapicería de carros, restauración de interiores y venta de vehículos usados premium en Bucaramanga y área metropolitana.",
+      "Especialistas en tapicería de carros y restauración premium de interiores en Bucaramanga y área metropolitana.",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${brandName} | Tapicería y vehículos Bucaramanga`,
+    title: `${brandName} | Tapicería automotriz Bucaramanga`,
     description:
-      "Tapicería automotriz premium y compra venta de vehículos en Santander. Cotiza por WhatsApp.",
+      "Tapicería automotriz premium y restauración de interiores en Santander. Cotiza por WhatsApp.",
   },
   robots: {
     index: true,

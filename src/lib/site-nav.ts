@@ -9,7 +9,6 @@ export const homeSectionLinks = [
   { href: "#inicio", label: "Inicio" },
   { href: "#servicios", label: "Servicios" },
   { href: "#galeria", label: "Galería" },
-  { href: "#vehiculos", label: "Vehículos" },
   { href: "#ubicacion", label: "Ubicación" },
   { href: "#preguntas-frecuentes", label: "FAQ" },
 ] as const;

@@ -4,7 +4,6 @@ import { TrustBar } from "@/components/landing/TrustBar";
 import { ServicesSection } from "@/components/landing/ServicesSection";
 import { GallerySection } from "@/components/landing/GallerySection";
 import { VehicleBrandsMarquee } from "@/components/landing/VehicleBrandsMarquee";
-import { FeaturedVehiclesSection } from "@/components/landing/FeaturedVehiclesSection";
 import { LocationSection } from "@/components/landing/LocationSection";
 import { FaqSection } from "@/components/landing/FaqSection";
 import { Footer } from "@/components/landing/Footer";
@@ -20,7 +19,6 @@ export default function HomePage() {
         <TrustBar />
         <ServicesSection />
         <GallerySection />
-        <FeaturedVehiclesSection />
         <LocationSection />
         <FaqSection />
       </main>

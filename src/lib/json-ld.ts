@@ -13,7 +13,7 @@ export const buildLocalBusinessJsonLd = (): string => {
     "@type": ["LocalBusiness", "AutomotiveBusiness"],
     name: brandName,
     description:
-      "Tapicería automotriz premium, restauración de interiores y compra venta de vehículos en Bucaramanga, Santander. Atención en Floridablanca, Girón y Piedecuesta.",
+      "Tapicería automotriz premium y restauración de interiores en Bucaramanga, Santander. Atención en Floridablanca, Girón y Piedecuesta.",
     url: siteUrl,
     telephone: `+${whatsappE164}`,
     image: `${siteUrl.replace(/\/$/, "")}/opengraph-image`,
@@ -46,14 +46,6 @@ export const buildLocalBusinessJsonLd = (): string => {
           "@type": "Service",
           name: "Tapicería y restauración de interiores automotrices",
           areaServed: "Bucaramanga y área metropolitana",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Compra y venta de vehículos",
-          areaServed: "Santander",
         },
       },
     ],

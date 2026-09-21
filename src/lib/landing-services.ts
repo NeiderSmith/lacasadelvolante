@@ -37,10 +37,4 @@ export const LANDING_SERVICES: readonly LandingService[] = [
     title: "Interiores a medida",
     desc: "Consolas, paneles y acabados integrados con identidad exclusiva para tu vehículo.",
   },
-  {
-    id: "venta-vehiculos",
-    barLabel: "Vehículos",
-    title: "Compra y venta de vehículos",
-    desc: "Inventario curado y asesoría en venta de carros usados premium.",
-  },
 ] as const;

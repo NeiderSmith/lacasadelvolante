@@ -17,9 +17,8 @@ import { homeSectionLinks, resolveSiteHref } from "@/lib/site-nav";
 
 const navLinks = homeSectionLinks;
 
-const resolveNavHref = (href: string, pathname: string) => {
+const resolveNavHref = (href: string) => {
   if (href.startsWith("/") && !href.startsWith("/#")) return href;
-  if (href === "#vehiculos" && pathname === "/vehiculos") return "/vehiculos";
   return resolveSiteHref(href);
 };
 
@@ -127,7 +126,7 @@ export const Navbar = () => {
             {navLinks.map((link) => (
               <a
                 key={link.href}
-                href={resolveNavHref(link.href, path)}
+                href={resolveNavHref(link.href)}
                 className={`rounded-md px-1 py-0.5 text-sm font-medium transition-colors ${
                   scrolled ? "text-lcdv-text-2 hover:text-lcdv-text" : "text-white/85 hover:text-white"
                 }`}
@@ -159,7 +158,7 @@ export const Navbar = () => {
           {navLinks.map((link) => (
             <a
               key={link.href}
-              href={resolveNavHref(link.href, path)}
+              href={resolveNavHref(link.href)}
               className={`whitespace-nowrap rounded-md px-2 py-1 text-xs font-medium transition-colors ${
                 scrolled ? "text-lcdv-text-2 hover:text-lcdv-text" : "text-white/80 hover:text-white"
               }`}

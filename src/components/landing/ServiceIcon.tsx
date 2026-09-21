@@ -82,21 +82,6 @@ export const ServiceIcon = ({ serviceId, className = "h-7 w-7 shrink-0" }: Servi
           <path d="M9 14h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       );
-    case "venta-vehiculos":
-      return (
-        <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden>
-          <path
-            d="M3 13h1l1.5-4h11L18 13h1"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <circle cx="7.5" cy="16.5" r="1.5" stroke="currentColor" strokeWidth="1.5" />
-          <circle cx="16.5" cy="16.5" r="1.5" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M5 16H4M20 16h-1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
-      );
     default:
       return (
         <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden>

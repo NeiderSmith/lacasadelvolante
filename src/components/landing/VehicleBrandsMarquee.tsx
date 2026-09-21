@@ -61,7 +61,7 @@ export const VehicleBrandsMarquee = () => {
           Marcas de vehículos que atendemos
         </h2>
         <p className="lcdv-lead mx-auto mt-3 max-w-2xl">
-          Tapicería, restauración de interiores y compra/venta de vehículos.
+          Tapicería y restauración de interiores para las principales marcas.
         </p>
       </div>
 

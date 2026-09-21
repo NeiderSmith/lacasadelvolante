@@ -116,8 +116,7 @@ export const HeroSection = () => {
               transition={{ delay: 0.14, duration: 0.5 }}
               className="mt-6 max-w-xl font-sans text-sm leading-relaxed text-white/95 drop-shadow-[0_1px_10px_rgba(0,0,0,0.85)] sm:text-base lg:text-lg"
             >
-              Restauración de interiores, tapizado de volantes y asientos, y compra venta de
-              vehículos.
+              Restauración de interiores, tapizado de volantes y asientos con acabados premium.
               <br />
               Atención en Bucaramanga, Floridablanca, Girón y Piedecuesta.
             </motion.p>
@@ -204,7 +203,7 @@ export const HeroSection = () => {
 
         <div className="mt-auto w-full border-t border-black/20 bg-lcdv-highlight">
           <nav
-            className="mx-auto grid max-w-7xl grid-cols-2 gap-y-6 px-4 py-6 sm:grid-cols-3 sm:px-6 lg:grid-cols-6 lg:gap-4 lg:px-8"
+            className="mx-auto grid max-w-7xl grid-cols-2 gap-y-6 px-4 py-6 sm:grid-cols-3 sm:px-6 lg:grid-cols-5 lg:gap-4 lg:px-8"
             aria-label="Servicios destacados"
           >
             {LANDING_SERVICES.map((s, i) => (
